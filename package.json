@@ -1,0 +1,41 @@
+{
+  "name": "gear-game-framework",
+  "version": "0.0.0",
+  "description": "A modular game framework for the web",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrAxf/GearGameFramework.git"
+  },
+  "keywords": [
+    "game",
+    "engine",
+    "framework",
+    "ec6",
+    "ec2015",
+    "html5",
+    "canvas",
+    "webgl"
+  ],
+  "author": "Juan Andrés García Cañadas",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MrAxf/GearGameFramework/issues"
+  },
+  "homepage": "https://github.com/MrAxf/GearGameFramework#readme",
+  "devDependencies": {
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-plugin-transform-class-properties": "^6.23.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "raw-loader": "^0.5.1",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.4.1"
+  }
+}
