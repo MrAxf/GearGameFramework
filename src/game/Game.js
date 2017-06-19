@@ -17,8 +17,31 @@ export default class Game{
 
     //Get WebGL context
     this.container = document.getElementById(this.options.container_id);
+
+    this.container.requestFullScreen = this.container.requestFullscreen ||
+      this.container.msRequestFullscreen ||
+      this.container.mozRequestFullScreen ||
+      this.container.webkitRequestFullscreen;
+
+    document.exitFullScreen = document.exitFullscreen ||
+      document.msExitFullscreen ||
+      document.mozCancelFullScreen ||
+      document.webkitCancelFullScreen;
+
+    this.fullScreenActive = false;
+
+    this.container.style.background = "#000000";
+    this.container.style.position = "relative";
+    this.container.style.display = "flex";
+    this.container.style.alignItems = "center";
+    this.container.style.justifyContent = "center";
+    this.container.style.overflow = "hidden";
+    this.container.style.width = "100%";
+    this.container.style.height = "100%";
+
     this.container.innerHTML = `<canvas id="${this.options.container_id}-canvas"></canvas>`;
     this.canvas = document.getElementById(`${this.options.container_id}-canvas`);
+
     this.gl = this.canvas.getContext("webgl");
     if (!this.gl) {
       throw new Error('Your browser not support WebGL 1.0.');
@@ -29,6 +52,7 @@ export default class Game{
 
     //Set canvas size
     this.resizeCanvas(this.options.width, this.options.height, true);
+    this.fitCanvasToConatiner();
 
     //Set up loop data
     this.loopData = {
@@ -51,6 +75,28 @@ export default class Game{
 
     this.renderer.setCanvasSize(this.options.width, this.options.height);
     this.renderer.setViewport();
+  }
+
+  fitCanvasToConatiner(){
+    let canvasProportions = this.canvas.clientWidth/this.canvas.clientHeight;
+    let containerProportions = this.container.clientWidth/this.container.clientHeight;
+
+    if(containerProportions > canvasProportions){
+      this.canvas.style.width = "auto";
+      this.canvas.style.height = "100%";
+    } else {
+      this.canvas.style.width = "100%";
+      this.canvas.style.height = "auto";
+    }
+  }
+
+  toggleFullScreen(activate = !this.fullScreenActive){
+    this.fullScreenActive = activate;
+
+    if(activate) this.container.requestFullScreen();
+    else document.exitFullScreen();
+
+    setTimeout(this.fitCanvasToConatiner.bind(this), 300);
   }
 
   loop(){

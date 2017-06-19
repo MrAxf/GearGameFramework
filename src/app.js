@@ -44,6 +44,8 @@ class MyGame extends Game{
     this.scott.render(this.position, this.hight);
   }
 }
-
-const game = new MyGame();
-game.start();
+document.addEventListener("DOMContentLoaded", (event) => {
+  const game = new MyGame();
+  game.start();
+  game.canvas.addEventListener("click", (e) => {game.toggleFullScreen();});
+});
