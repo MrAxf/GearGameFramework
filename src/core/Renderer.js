@@ -61,7 +61,7 @@ export default class Renderer{
   }
 
   setViewport(width = this.gl.canvas.width, height = this.gl.canvas.height){
-    this.gl.viewport(0, 0, width, height);
+    this.gl.viewport(0, 0, width*1.5, height*1.5);
   }
 
   clear(color = new Color(0, 0, 0, 0)){
